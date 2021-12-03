@@ -1,0 +1,47 @@
+.connect-new-user-btn {
+  background-color: #ff0066;
+  border: none;
+  border-radius: 20px;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  font-size: 16px;
+  margin: 4px 2px;
+  opacity: 0.6;
+  transition: 0.3s;
+}
+.connect-new-user-btn:hover {
+	opacity: 1
+}
+.contact-container{
+	margin-left: 42%;
+}
+
+/*Search Bar*/
+.topnav .search-container {
+  float: right;
+}
+
+.w3-top input[type=text] {
+  float: left;
+  padding: 6px;
+  margin-top: 8px;
+  margin-left: 580px;
+  font-size: 17px;
+  border: none;
+}
+
+.w3-top .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+.w3-top .search-container button:hover {
+  background: #ccc;
+}
