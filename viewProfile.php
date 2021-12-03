@@ -188,7 +188,7 @@
             //Insertion  User_details in Table User Details
             $age = round((time()-strtotime($birthDate))/(3600*24*365.25));
             $query = "insert  into  user_details 
-            ('user_id',`date_of_birth`,`age`,`gender`,`interested_in`, `marital_status`, `country`, `city`,`profile_image`,`user_type` ) VALUES(?,?,?,?,?,?,?,?,?)";
+            ('user_id',`date_of_birth`,`age`,`gender`,`interested_in`, `marital_status`, `country`, `city`,`profile_image`,`user_type` ) VALUES(?,?,?,?,?,?,?,?,?,?)";
             $stmt = $connection->prepare($query);
             $stmt->execute([$userId,$birthDate,$age,$gender,$interestedIn,$maritalStatus,$country,$city,$NewImageName,$isPremium]);
 

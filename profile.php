@@ -120,7 +120,6 @@
         ?>
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <h4 class="w3-center">My Profile</h4>
          <p class="w3-center"><img src='<?="images/".$row[0]['profile_image']?>' class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
          <hr>
          <p>Name : <?=$row[0]['first_name']." ".$row[0]['last_name']?></p>
