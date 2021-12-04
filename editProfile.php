@@ -99,7 +99,6 @@
 
                     <!--<p class="w3-center">Upload a different photo.</p>-->
 
-
                         <input type="file" id="myFile" name="image[]"  class="w3-border w3-block">
                         <label style="font-weight: bold; font-size: 120%; padding: 5px;">Regular</label>
                         <label class="w3-margin switch">
@@ -221,7 +220,7 @@
                     </div>
 
                     <p><label>Interests</label>
-                    <p><textarea class="w3-input " name="Interests" type="text" > <?=$interests?> </textarea> </p>
+                    <p><textarea class="w3-input " name="Interests" type="text" ><?=$interests?></textarea> </p>
 
                        <button class="w3-button w3-section w3-teal w3-ripple"> Submit </button></p>
 

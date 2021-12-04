@@ -2,8 +2,8 @@
 const serverName = "localhost";
 const port = 3306;
 const database = "dating_website";
-const username = "root";
-const password = "";
+const username = "project";
+const password = "project";
 const connectionString = "mysql:host=" . serverName . ";dbname=" . database . ";port=" . port;
 $stmt = "";
 $connection = null;

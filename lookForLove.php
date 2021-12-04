@@ -29,7 +29,12 @@ $connection = getConnection();
 <body class="w3-theme-l5">
 
 <!-- Navbar -->
-<?php include "HeaderFooter/navbar.php";?>
+<?php
+    if (isset($_SESSION['currentUserId']))
+        include "HeaderFooter/navbar.php";
+    else
+        include "HeaderFooter/homeNavbar.php";
+?>
 
 <!-- Page Container -->
 <div class="w3-container w3-content" style="max-width:1400px;margin-top:80px">
@@ -50,7 +55,18 @@ $connection = getConnection();
 
                     <p>
                         <label>Interests</label>
-                        <input class="w3-input" type="text" name="interests">
+                        <select class="w3-input" name="interests">
+                            <?php
+                                $stmt = $connection->prepare("select distinct interest from user_interests");
+                                $stmt->execute();
+                                foreach ($stmt->fetchAll() as $interest){
+
+                            ?>
+                                <option><?=$interest['interest']?></option>
+                            <?php
+                                }
+                            ?>
+                        </select>
                     </p>
 
                     <p>
@@ -97,7 +113,6 @@ $connection = getConnection();
                     $stmt->execute();
                     $stmt->setFetchMode(PDO::FETCH_ASSOC);
                     foreach ($stmt->fetchAll() as $item){
-                        if(isset($_SESSION['currentUserId']) && $item['user_id']!=$_SESSION['currentUserId']){
                         ?>
                         <a href="profile.php?profileUserId=<?=$item['user_id']?>">
                         <div class="card">
@@ -108,7 +123,6 @@ $connection = getConnection();
                         </div>
                         </a>
                         <?php
-                        }
                     }
                 }
             }

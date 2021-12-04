@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 03, 2021 at 05:48 AM
+-- Generation Time: Dec 04, 2021 at 02:06 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -40,6 +40,7 @@ CREATE TABLE `favorites` (
 --
 
 INSERT INTO `favorites` (`user_id`, `favorite_user_id`) VALUES
+(1, 3),
 (3, 1);
 
 -- --------------------------------------------------------
@@ -74,7 +75,10 @@ INSERT INTO `messages` (`message_id`, `sender_id`, `reciever_id`, `message_conte
 (9, 1, 3, 'what kind of music do you listen to?', '2021-12-03 04:00:07.000000', 1),
 (10, 3, 1, 'hip-hop', '2021-12-03 04:08:23.000000', 1),
 (11, 3, 1, 'you?', '2021-12-03 04:08:30.000000', 1),
-(12, 1, 3, 'same', '2021-12-03 04:08:58.000000', 1);
+(12, 1, 3, 'same', '2021-12-03 04:08:58.000000', 1),
+(13, 3, 4, 'mjbj,hbjh', '2021-12-03 20:03:29.000000', 0),
+(14, 1, 3, 'hello', '2021-12-03 20:06:25.000000', 1),
+(15, 1, 2, 'bnm,', '2021-12-03 21:45:57.000000', 0);
 
 -- --------------------------------------------------------
 
@@ -98,9 +102,13 @@ CREATE TABLE `notifications` (
 INSERT INTO `notifications` (`notification_id`, `user_id`, `sender_id`, `content`, `type`) VALUES
 (2, 2, 3, ' ignored your wink :(', 1),
 (21, 2, 1, ' added you to their Favorites List', 1),
-(22, 3, 1, ' added you to their Favorites List', 1),
-(23, 3, 1, ' removed you from their Favorites List', 1),
-(24, 2, 1, ' removed you from their Favorites List', 1);
+(24, 2, 1, ' removed you from their Favorites List', 1),
+(28, 4, 3, ' added you to their Favorites List', 1),
+(29, 4, 3, ' removed you from their Favorites List', 1),
+(34, 5, 1, ' added you to their Favorites List', 1),
+(35, 5, 1, ' removed you from their Favorites List', 1),
+(36, 1, 3, ' added you to their Favorites List', 1),
+(37, 3, 1, ' accepted your wink ;)', 1);
 
 -- --------------------------------------------------------
 
@@ -126,7 +134,8 @@ INSERT INTO `users` (`user_id`, `first_name`, `last_name`, `username`, `password
 (2, 'Harman', 'Harman', 'harmanUser', 'harmanUser@123'),
 (3, 'Monica', 'Bellucci', 'missmalena', 'missmalenamanhunt'),
 (4, 'Yagnesh', 'Patel', 'yagneskalagnes', 'thodabadapassword@123'),
-(5, 'Ramesh', 'Patel', 'thisEmail@email', 'passpasspasspass');
+(5, 'Ramesh', 'Patel', 'thisEmail@email', 'passpasspasspass'),
+(9, 'Diana', 'Matthew', 'dianamatthew', 'dianamatthew');
 
 -- --------------------------------------------------------
 
@@ -153,11 +162,12 @@ CREATE TABLE `user_details` (
 --
 
 INSERT INTO `user_details` (`user_id`, `date_of_birth`, `gender`, `interested_in`, `marital_status`, `country`, `city`, `profile_image`, `age`, `user_type`) VALUES
-(1, '1998-10-30', 'Male', 'Female', 'Single', 'Canada', 'Montreal', 'aakashprofile.jpeg', 23, 0),
+(1, '1998-10-30', 'Male', 'Female', 'Single', 'Canada', 'Montreal', 'aakashprofile.jpeg', 23, 1),
 (2, '1995-10-15', 'Male', 'Female', 'Divorced', 'Canada', 'Toronto', 'harmanprofile.jpg', 26, 0),
-(3, '1988-10-30', 'Female', 'Male', 'Married', 'Italy', 'Rome', 'monicanewprofile-1638491614.jpg', 36, 1),
+(3, '1988-10-30', 'Female', 'Male', 'Married', 'Italy', 'Rome', 'monicaprofile.jpg', 36, 1),
 (4, '1997-10-20', 'Male', 'Female', 'Single', 'Canada', 'Toronto', 'yagneshprofile.jpg', 24, 0),
-(5, '2000-05-09', 'Male', 'Female', 'Single', 'India', 'Vadodara', 'noImage.jpg', 22, 0);
+(5, '2000-05-09', 'Male', 'Female', 'Single', 'India', 'Vadodara', 'noImage.jpg', 22, 0),
+(9, '2001-02-06', 'Female', 'Male', 'Single', 'India', 'chennai', 'noImage.jpg', 21, 0);
 
 -- --------------------------------------------------------
 
@@ -193,7 +203,9 @@ INSERT INTO `user_images` (`user_id`, `image_path`) VALUES
 (4, 'yagnesh3.jpg'),
 (4, 'yagnesh4.jpg'),
 (1, 'hrithik_roshan.jpg'),
-(3, 'monicaBelluci.jpg');
+(3, 'monicaBelluci.jpg'),
+(3, 'monicanewprofile.jpg'),
+(1, 'monica1.jpg');
 
 -- --------------------------------------------------------
 
@@ -212,10 +224,6 @@ CREATE TABLE `user_interests` (
 --
 
 INSERT INTO `user_interests` (`user_id`, `interest`) VALUES
-(1, 'chess'),
-(1, 'movies'),
-(1, 'comedy'),
-(1, 'pets'),
 (2, 'spirituality'),
 (2, 'food'),
 (2, 'programming'),
@@ -223,13 +231,28 @@ INSERT INTO `user_interests` (`user_id`, `interest`) VALUES
 (4, 'web development'),
 (4, 'singing'),
 (4, 'veganism'),
-(3, '   acting'),
+(3, 'acting'),
 (3, 'singing'),
 (3, 'pets'),
 (3, 'comedy'),
 (3, 'chess'),
 (3, 'modeling  '),
-(5, 'boxing');
+(5, 'boxing'),
+(7, 'dancing'),
+(7, 'singing'),
+(7, 'writing'),
+(7, 'reading'),
+(8, 'dancing'),
+(8, 'singing'),
+(8, 'guitar'),
+(9, 'dancing'),
+(9, 'singing'),
+(9, 'guitar'),
+(1, 'chess'),
+(1, 'movies'),
+(1, 'comedy'),
+(1, 'pets'),
+(1, 'kitten     ');
 
 -- --------------------------------------------------------
 
@@ -243,6 +266,13 @@ CREATE TABLE `winks` (
   `sender_id` int(10) NOT NULL,
   `reciever_id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `winks`
+--
+
+INSERT INTO `winks` (`wink_id`, `sender_id`, `reciever_id`) VALUES
+(10, 3, 4);
 
 --
 -- Indexes for dumped tables
@@ -280,25 +310,25 @@ ALTER TABLE `winks`
 -- AUTO_INCREMENT for table `messages`
 --
 ALTER TABLE `messages`
-  MODIFY `message_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `message_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `notifications`
 --
 ALTER TABLE `notifications`
-  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `user_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `winks`
 --
 ALTER TABLE `winks`
-  MODIFY `wink_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `wink_id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

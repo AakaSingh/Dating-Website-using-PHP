@@ -8,6 +8,7 @@
     $stmt->execute(array($userId));
     $rows=$stmt->fetchAll();
 
+
     if(count($rows)>0)  //if user exist in USer Details table
     {
 
@@ -16,6 +17,7 @@
         $stmt = $connection->prepare($query);
         $stmt->execute(array($userId));
         $stmt->setFetchMode(PDO::FETCH_ASSOC);
+        $profileImage = "";
 
 
         foreach ($stmt->fetchAll() as $row)
@@ -45,7 +47,7 @@
         {
             $interestList[] = $row['interest'];
         }
-        $comma_separated = implode(",",  $interestList);
+        $comma_separated = implode(",",$interestList);
 
         $interests =  Strip_tags($comma_separated);
 
@@ -77,7 +79,7 @@
             $interestsArray = explode(",", $interests);
 
             /*Updating Profile Image */
-            if(isset($_FILES['image']['name'][0])) {
+            if($_FILES['image']['name'][0] != "") {
                 $output_dir = "images/";/* Path for file upload */
                 $RandomNumber = time();
                 $ImageName = str_replace(' ', '-', strtolower($_FILES['image']['name'][0]));
@@ -137,7 +139,7 @@
         $country = "";
         $city =  "";
         $isPremium="";
-        $interests =  "";
+        $interests ="";
         $profileImage = "noImage.jpg";   // save photo in upload folder in as noImage ok
 
 
@@ -163,11 +165,12 @@
             $country = $_POST['country'];
             $city = $_POST['city'];
             $interests = $_POST['Interests'];
+            $interestsArray = explode(",", $interests);
             $maritalStatus = $_POST['maritalStatus'];
 
 
             /*   For IMAGE upload */
-            if(isset($_FILES['image']['name'][0])) {
+            if($_FILES['image']['name'][0] != "") {
                 $output_dir = "images/";/* Path for file upload */
                 $RandomNum = time();
                 $ImageName = str_replace(' ', '-', strtolower($_FILES['image']['name'][0]));
@@ -176,21 +179,20 @@
                 $ImageExt = substr($ImageName, strrpos($ImageName, '.'));
                 $ImageExt = str_replace('.', '', $ImageExt);
                 $ImageName = preg_replace("/\.[^.\s]{3,4}$/", "", $ImageName);
-                $NewImageName = $ImageName . '-' . $RandomNum . '.' . $ImageExt;
-                $ret[$NewImageName] = $output_dir . $NewImageName;
+                $profileImage = $ImageName . '-' . $RandomNum . '.' . $ImageExt;
+                $ret[$profileImage] = $output_dir . $profileImage;
                 /* Try to create the directory if it does not exist */
                 if (!file_exists($output_dir)) {
                     @mkdir($output_dir, 0777);
                 }
-                move_uploaded_file($_FILES["image"]["tmp_name"][0], $output_dir . "/" . $NewImageName);
+                move_uploaded_file($_FILES["image"]["tmp_name"][0], $output_dir . "/" . $profileImage);
                 /*Image code end */
             }
             //Insertion  User_details in Table User Details
             $age = round((time()-strtotime($birthDate))/(3600*24*365.25));
-            $query = "insert  into  user_details 
-            ('user_id',`date_of_birth`,`age`,`gender`,`interested_in`, `marital_status`, `country`, `city`,`profile_image`,`user_type` ) VALUES(?,?,?,?,?,?,?,?,?,?)";
+            $query = "insert  into  user_details values(?,?,?,?,?,?,?,?,?,?)";
             $stmt = $connection->prepare($query);
-            $stmt->execute([$userId,$birthDate,$age,$gender,$interestedIn,$maritalStatus,$country,$city,$NewImageName,$isPremium]);
+            $stmt->execute([$userId,$birthDate,$gender,$interestedIn,$maritalStatus,$country,$city,$profileImage,$age,$isPremium]);
 
            // User has entered name at signup page , so here we can only update the name of user in users table
             $sql = "UPDATE users SET first_name=:name, last_name=:surname WHERE user_id=:id";
@@ -201,6 +203,14 @@
             ];
             $stmt= $connection->prepare($sql);
             $stmt->execute($data);
+
+            /* it will Insert  Interests of the given User, one row per one Interest */
+            foreach ($interestsArray as &$value)
+            {
+                $query = "insert  into  user_interests (`user_id`, interest ) VALUES(?,?)";
+                $stmt = $connection->prepare($query);
+                $stmt->execute([$userId,$value]);
+            }
             header("location: profile.php");
     }
 }

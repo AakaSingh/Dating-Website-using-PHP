@@ -64,7 +64,12 @@
 <body class="w3-theme-l5">
 
 <!-- Navbar -->
-<?php include "HeaderFooter/navbar.php";?>
+<?php
+if (isset($_SESSION['currentUserId']))
+    include "HeaderFooter/navbar.php";
+else
+    include "HeaderFooter/homeNavbar.php";
+?>
 <!-- Navbar on small screens -->
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
   <a href="#" class="w3-bar-item w3-button w3-padding-large">Link 1</a>
@@ -143,7 +148,7 @@
                         $themeCounter = 1;
                         for($counter = 0; $counter<count($interests); $counter++){
                     ?>
-                        <span class="w3-tag w3-small w3-theme-d<?=$themeCounter?>"><?=$interests[$counter]['interest']?></span>
+                    <a href="interestBasedUsersPage.php?interest=<?=$interests[$counter]['interest']?>"><span class="w3-tag w3-small w3-theme-d<?=$themeCounter?>"><?=$interests[$counter]['interest']?></span></a>
                     <?php
                             $themeCounter++;
                             if($themeCounter > 5){
