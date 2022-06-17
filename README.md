@@ -1,4 +1,9 @@
 # Dating-Website-using-PHP!
+
+This is a website for True Love Seekers, with features like sending and accepting winks, sending messages and adding people to your favorites,
+Also the LookForLove page helps you look for just the right person for you by filtering them based on their age, location, interests etc. Below are screeshots of 
+some of the major feature of this website.
+
 ![Screenshot (26)](https://user-images.githubusercontent.com/45305113/169148485-77d8c9eb-992c-4a5f-86eb-71a0258a83fb.png)
 ![Screenshot (17)](https://user-images.githubusercontent.com/45305113/169148489-3342d801-6a47-4560-aea3-fa5af09a720f.png)
 ![Screenshot (18)](https://user-images.githubusercontent.com/45305113/169148490-f2a9bf35-9ee6-4157-9bab-414805596651.png)
